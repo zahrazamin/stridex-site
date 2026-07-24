@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import styles from "./HookSection.module.css";
 
 const problems = [
@@ -43,18 +43,20 @@ const wordVariant = {
   visible: { opacity: 1, transition: { duration: 0.01 } },
 };
 
-const cardVariants = {
+const EASE_OUT = [0, 0, 0.58, 1] as const;
+
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: "easeOut", delay: i * 0.14 },
+    transition: { duration: 0.55, ease: EASE_OUT, delay: i * 0.14 },
   }),
 };
 
-const solveVariants = {
+const solveVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
 };
 
 export default function HookSection() {
