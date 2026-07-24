@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrideX — Anatomy Section</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grey-bg:#EFEEEA;
+    --grey-bg-2:#E5E3DC;
+    --ink:#1B1C16;
+    --ink-dim:#6B6B5F;
+    --orange:#E4622B;
+    --olive:#3D4028;
+    --cream:#F3F0E7;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Manrope', sans-serif; background:var(--grey-bg); }
+
+  .anatomy{
+    padding:130px 6vw 150px;
+    background:var(--grey-bg);
+  }
+
+  .anatomy-head{
+    max-width:640px;
+    margin:0 auto 80px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--olive);
+    color:var(--cream);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:8px 16px;
+    border-radius:20px;
+    margin-bottom:26px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:6px; height:6px;
+    background:var(--orange);
+    border-radius:50%;
+  }
+
+  .anatomy-title{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:800;
+    font-size:clamp(38px, 5vw, 58px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    text-transform:lowercase;
+  }
+  .anatomy-title .accent{ color:var(--orange); }
+
+  .anatomy-sub{
+    margin-top:20px;
+    font-size:16.5px;
+    line-height:1.65;
+    color:var(--ink-dim);
+    font-weight:500;
+  }
+
+  /* ===== BODY: image + list ===== */
+  .anatomy-body{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:60px;
+    max-width:1180px;
+    margin:0 auto;
+    align-items:start;
+  }
+
+  .anatomy-visual{
+    position:sticky;
+    top:100px;
+    border-radius:20px;
+    overflow:hidden;
+    background:var(--grey-bg-2);
+  }
+  .anatomy-visual img{
+    width:100%;
+    display:block;
+  }
+
+  .layer-list{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .layer-item{
+    display:flex;
+    gap:24px;
+    padding:34px 0;
+    border-bottom:1px solid rgba(27,28,22,0.1);
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .layer-item.in-view{ opacity:1; transform:translateY(0); }
+  .layer-item:first-child{ padding-top:0; }
+
+  .layer-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:600;
+    color:var(--orange);
+    min-width:34px;
+    padding-top:3px;
+  }
+
+  .layer-name{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+
+  .layer-desc{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-dim);
+    max-width:420px;
+  }
+
+  @media (max-width:900px){
+    .anatomy{ padding:90px 6vw 100px; }
+    .anatomy-head{ margin-bottom:56px; }
+    .anatomy-body{ grid-template-columns:1fr; gap:36px; }
+    .anatomy-visual{ position:static; }
+    .layer-item{ padding:26px 0; }
+  }
+</style>
+</head>
+<body>
+
+<section class="anatomy">
+  <div class="anatomy-head">
+    <div class="eyebrow">Inside the sole</div>
+    <h2 class="anatomy-title">six layers.<br>one seamless <span class="accent">stride</span>.</h2>
+    <p class="anatomy-sub">Every layer has exactly one job. Together they turn an ordinary step into data, and every goal you hit into something you can actually feel.</p>
+  </div>
+
+  <div class="anatomy-body">
+    <div class="anatomy-visual">
+      <img src="layers.png" alt="Exploded view of the StrideX sole, showing all six internal layers">
+    </div>
+
+    <div class="layer-list" id="layerList">
+      <div class="layer-item">
+        <div class="layer-num">01</div>
+        <div>
+          <div class="layer-name">Upper</div>
+          <p class="layer-desc">Breathable knit mesh, shaped for grip and all-day comfort without adding weight.</p>
+        </div>
+      </div>
+      <div class="layer-item">
+        <div class="layer-num">02</div>
+        <div>
+          <div class="layer-name">Cushion</div>
+          <p class="layer-desc">A soft support layer that keeps every step comfortable, from the first mile to the last.</p>
+        </div>
+      </div>
+      <div class="layer-item">
+        <div class="layer-num">03</div>
+        <div>
+          <div class="layer-name">Vibration</div>
+          <p class="layer-desc">Multiple motors deliver the massage the moment you hit your daily step goal.</p>
+        </div>
+      </div>
+      <div class="layer-item">
+        <div class="layer-num">04</div>
+        <div>
+          <div class="layer-name">Isolation</div>
+          <p class="layer-desc">Shields the electronics from impact and keeps every component stable underfoot.</p>
+        </div>
+      </div>
+      <div class="layer-item">
+        <div class="layer-num">05</div>
+        <div>
+          <div class="layer-name">Sensor &amp; Circuit</div>
+          <p class="layer-desc">Where the ESP32 and motion sensor quietly count every step you take, in real time.</p>
+        </div>
+      </div>
+      <div class="layer-item">
+        <div class="layer-num">06</div>
+        <div>
+          <div class="layer-name">Base</div>
+          <p class="layer-desc">A durable outsole built for grip, protection, and everyday wear, with the battery centered for balance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll('.layer-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.3 });
+  items.forEach(item => observer.observe(item));
+</script>
+
+</body>
+</html>

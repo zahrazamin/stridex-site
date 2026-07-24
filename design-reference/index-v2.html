@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrideX — Meet StrideX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* hero (video) tokens */
+    --charcoal:#14150F;
+    --cream:#F3F0E7;
+    --cream-dim:rgba(243,240,231,0.72);
+    --orange:#E4622B;
+    --orange-hover:#F27A45;
+
+    /* site-wide tokens for sections below the fold, for reference */
+    --grey-bg:#EFEEEA;
+    --ink:#1B1C16;
+    --olive:#3D4028;
+    --tan:#A9A283;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Manrope', sans-serif; background:var(--charcoal); }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .video-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .video-bg video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    animation:kenburns 22s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{
+    0%{ transform:scale(1) translate(0,0); }
+    100%{ transform:scale(1.08) translate(-1%, -1%); }
+  }
+
+  /* readability gradient, heavier at top/bottom for nav + any lower copy */
+  .video-scrim{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+      linear-gradient(180deg, rgba(20,21,15,0.55) 0%, rgba(20,21,15,0.05) 22%, rgba(20,21,15,0.05) 70%, rgba(20,21,15,0.6) 100%);
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:absolute;
+    top:0; left:0; right:0;
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:26px 5vw;
+  }
+
+  .logo-mark{
+    width:48px;
+    height:48px;
+    background:var(--cream);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .logo-mark svg{ width:22px; height:22px; }
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .icon-btn{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(243,240,231,0.14);
+    border:1px solid rgba(243,240,231,0.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:background 0.25s ease;
+  }
+  .icon-btn:hover{ background:rgba(243,240,231,0.24); }
+  .icon-btn:focus-visible{ outline:2px solid var(--orange); outline-offset:3px; }
+
+  .pill-cta{
+    height:48px;
+    padding:0 26px;
+    border-radius:24px;
+    background:var(--orange);
+    color:var(--charcoal);
+    border:none;
+    font-family:'Manrope', sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:background 0.25s ease, transform 0.25s ease;
+  }
+  .pill-cta:hover{ background:var(--orange-hover); transform:translateY(-1px); }
+  .pill-cta:focus-visible{ outline:2px solid var(--cream); outline-offset:3px; }
+
+  /* ===== HEADLINE ===== */
+  .hero-copy{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    padding:0 6vw;
+    opacity:0;
+    animation:riseIn 0.9s ease forwards;
+    animation-delay:0.35s;
+  }
+
+  .headline{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:800;
+    font-size:clamp(56px, 9.5vw, 140px);
+    line-height:0.94;
+    letter-spacing:-0.01em;
+    color:var(--cream);
+    text-transform:lowercase;
+  }
+
+  .headline .accent{ color:var(--orange); }
+
+  .hero-sub{
+    margin-top:22px;
+    font-size:17px;
+    color:var(--cream-dim);
+    max-width:480px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.6;
+    font-weight:500;
+  }
+
+  @keyframes riseIn{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:28px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5;
+    width:26px;
+    height:42px;
+    border:1.5px solid rgba(243,240,231,0.5);
+    border-radius:14px;
+    opacity:0;
+    animation:riseIn 0.9s ease forwards;
+    animation-delay:0.9s;
+  }
+  .scroll-hint::after{
+    content:'';
+    position:absolute;
+    top:8px;
+    left:50%;
+    width:4px;
+    height:8px;
+    background:var(--cream);
+    border-radius:2px;
+    transform:translateX(-50%);
+    animation:dot 1.8s ease-in-out infinite;
+  }
+  @keyframes dot{
+    0%{ opacity:1; top:8px; }
+    70%{ opacity:0; top:22px; }
+    100%{ opacity:0; top:8px; }
+  }
+
+  @media (max-width:640px){
+    nav{ padding:20px 5vw; }
+    .logo-mark, .icon-btn{ width:42px; height:42px; }
+    .pill-cta{ height:42px; padding:0 20px; font-size:12px; }
+    .hero-sub{ font-size:15px; }
+    .scroll-hint{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .video-bg video{ animation:none; }
+    .hero-copy, .scroll-hint{ animation:none !important; opacity:1 !important; }
+    .scroll-hint::after{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+  <div class="video-bg">
+    <!--
+      Drop your real clip in this same folder as "hero-video.mp4" and it will
+      autoplay here. Until then this falls back to the poster image below.
+      Keep clips under ~8s looping, muted, no dialogue needed.
+    -->
+    <video autoplay muted loop playsinline poster="hero-shoe.jpg">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-scrim"></div>
+
+  <nav>
+    <div class="logo-mark" aria-label="StrideX">
+      <!-- swap for your real logo file, e.g. <img src="logo.svg"> -->
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 16c2-1 3-3 3-5 0-3 2-5 5-5s5 2 5 5c0 2 1 4 3 5" stroke="#14150F" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 5h14M2 9h14M2 13h14" stroke="#F3F0E7" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="pill-cta">Get In Touch</button>
+    </div>
+  </nav>
+
+  <div class="hero-copy">
+    <h1 class="headline">meet<br><span class="accent">stridex</span></h1>
+    <p class="hero-sub">A shoe that counts your steps and rewards you for hitting them, no wearable, no app-checking required.</p>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true"></div>
+
+</section>
+
+</body>
+</html>

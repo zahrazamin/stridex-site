@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrideX — Hook Section v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grey-bg:#EFEEEA;
+    --ink:#1B1C16;
+    --ink-dim:#6B6B5F;
+    --orange:#E4622B;
+    --olive:#3D4028;
+    --cream:#F3F0E7;
+    --line:rgba(27,28,22,0.12);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:'Manrope', sans-serif; background:var(--grey-bg); }
+
+  .hook{
+    padding:120px 6vw 100px;
+    background:var(--grey-bg);
+  }
+
+  .hook-head{
+    max-width:640px;
+    margin:0 auto 64px;
+  }
+
+  .hook-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin-bottom:20px;
+  }
+  .hook-label::before{ content:'— '; color:var(--orange); }
+
+  .hook-title{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:800;
+    font-size:clamp(30px, 4vw, 46px);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    text-transform:lowercase;
+  }
+
+  /* ===== COMPARISON TABLE ===== */
+  .table{
+    max-width:920px;
+    margin:0 auto;
+    border-top:1px solid var(--line);
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns:200px 1fr 40px;
+    gap:32px;
+    align-items:center;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .row.in-view{ opacity:1; transform:translateY(0); }
+
+  .row-name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+
+  .row-problem{
+    font-size:15.5px;
+    line-height:1.55;
+    color:var(--ink-dim);
+  }
+
+  .row-mark{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    border:1.5px solid rgba(27,28,22,0.25);
+    position:relative;
+    justify-self:end;
+  }
+  .row-mark::before, .row-mark::after{
+    content:'';
+    position:absolute;
+    top:50%; left:50%;
+    width:10px; height:1.5px;
+    background:var(--ink-dim);
+  }
+  .row-mark::before{ transform:translate(-50%,-50%) rotate(45deg); }
+  .row-mark::after{ transform:translate(-50%,-50%) rotate(-45deg); }
+
+  /* the solve row, visually distinct */
+  .row-solve{
+    grid-template-columns:200px 1fr 40px;
+    background:var(--ink);
+    margin:18px 0 0;
+    border-bottom:none;
+    border-radius:14px;
+    padding:30px 28px;
+  }
+  .row-solve .row-name{
+    color:var(--orange);
+    font-size:15px;
+  }
+  .row-solve .row-problem{
+    color:var(--cream);
+    font-size:17px;
+    font-weight:600;
+    line-height:1.5;
+  }
+  .row-solve .row-mark{
+    border-color:var(--orange);
+  }
+  .row-solve .row-mark::before, .row-solve .row-mark::after{ display:none; }
+  .row-solve .row-mark::before{
+    display:block;
+    content:'';
+    width:6px; height:11px;
+    border-right:2px solid var(--orange);
+    border-bottom:2px solid var(--orange);
+    top:44%; left:50%;
+    transform:translate(-50%,-55%) rotate(45deg);
+  }
+
+  @media (max-width:720px){
+    .row, .row-solve{ grid-template-columns:1fr 32px; }
+    .row-name{ grid-column:1/2; grid-row:1; }
+    .row-problem{ grid-column:1/3; grid-row:2; margin-top:8px; }
+    .row-mark{ grid-column:2/3; grid-row:1; justify-self:end; }
+    .hook{ padding:90px 6vw 80px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hook">
+  <div class="hook-head">
+    <div class="hook-label">what's already out there</div>
+    <h2 class="hook-title">every option has the same gap.</h2>
+  </div>
+
+  <div class="table">
+    <div class="row">
+      <div class="row-name">FITNESS BAND</div>
+      <div class="row-problem">Accurate, but it's one more device to charge, wear, and remember.</div>
+      <div class="row-mark"></div>
+    </div>
+    <div class="row">
+      <div class="row-name">PHONE PEDOMETER</div>
+      <div class="row-problem">Only counts steps when your phone is actually on you.</div>
+      <div class="row-mark"></div>
+    </div>
+    <div class="row">
+      <div class="row-name">BASIC CLIP PEDOMETER</div>
+      <div class="row-problem">Counts steps, but gives you nothing back. No goal, no feedback, no reason to look.</div>
+      <div class="row-mark"></div>
+    </div>
+
+    <div class="row row-solve">
+      <div class="row-name">STRIDEX</div>
+      <div class="row-problem">The sensor lives in the sole. No band, no app-checking, no dead battery to forget. Hit your goal, and the shoe tells you instantly, with a massage underfoot.</div>
+      <div class="row-mark"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const rows = document.querySelectorAll('.row');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.25 });
+  rows.forEach(r => observer.observe(r));
+</script>
+
+</body>
+</html>
