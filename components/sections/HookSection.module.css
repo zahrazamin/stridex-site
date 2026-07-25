@@ -1,234 +1,224 @@
-/* ===== HOOK / PROBLEM SECTION ===== */
+/* ===== HOOK SECTION ===== */
 .hook {
-  padding: 100px 6vw 100px;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8vh 6vw;
   background: var(--grey-bg);
 }
 
-.hookHead {
-  max-width: 640px;
-  margin: 0 0 44px;
+/* ── BLOBS ── */
+.blob1,
+.blob2,
+.blob3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  animation: drift 16s ease-in-out infinite;
 }
 
-.hookLabel {
+.blob1 {
+  width: 420px;
+  height: 420px;
+  background: var(--olive);
+  top: -10%;
+  left: -8%;
+  opacity: 0.35;
+  animation-delay: 0s;
+}
+
+.blob2 {
+  width: 360px;
+  height: 360px;
+  background: var(--orange);
+  bottom: -12%;
+  right: -6%;
+  opacity: 0.18;
+  animation-delay: -6s;
+}
+
+.blob3 {
+  width: 280px;
+  height: 280px;
+  background: #C9C4AE;
+  top: 40%;
+  right: 20%;
+  opacity: 0.25;
+  animation-delay: -11s;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(30px, -20px) scale(1.08); }
+}
+
+/* ── STAGE INNER ── */
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 920px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── PROBLEM ── */
+.eyebrow {
   font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-dim);
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 
-.hookLabel::before {
+.eyebrow::before {
   content: '— ';
   color: var(--orange);
 }
 
-.hookTitle {
+.typedLine {
   font-family: var(--font-plus-jakarta-sans, 'Plus Jakarta Sans', sans-serif);
   font-weight: 800;
-  font-size: clamp(30px, 4vw, 46px);
-  line-height: 1.15;
+  font-size: clamp(28px, 4.6vw, 52px);
+  line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--ink);
+  text-transform: lowercase;
+  min-height: 2.4em;
 }
 
-.wrap {
-  max-width: 1180px;
-  margin: 0 auto;
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  background: var(--orange);
+  margin-left: 3px;
+  vertical-align: -0.1em;
+  animation: blink 0.9s step-end infinite;
 }
 
-/* ===== PROBLEM CARDS (3 across) ===== */
-.problemGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Device row */
+.deviceRow {
+  display: flex;
+  justify-content: center;
   gap: 20px;
-  margin-bottom: 20px;
+  margin: 44px 0 30px;
 }
 
-.pCard {
+.deviceCard {
+  width: 140px;
+  text-align: center;
+}
+
+.deviceFrame {
+  width: 140px;
+  height: 140px;
+  border-radius: 38% 62% 55% 45% / 45% 40% 60% 55%;
   background: var(--grey-card);
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  opacity: 0; /* Framer Motion overrides this — prevents SSR flash */
-}
-
-.pPhoto {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-  flex-shrink: 0;
-}
-
-.pBody {
-  padding: 24px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.pName {
-  font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  color: var(--ink);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  margin: 0 auto 14px;
 }
 
-.xMark {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid rgba(200, 40, 40, 0.7);
-  background: rgba(200, 40, 40, 0.08);
-  position: relative;
-  flex-shrink: 0;
+.deviceFrame svg {
+  width: 52px;
+  height: 52px;
 }
 
-.xMark::before,
-.xMark::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 11px;
-  height: 2px;
-  background: #C82828;
-  border-radius: 1px;
-}
-
-.xMark::before { transform: translate(-50%, -50%) rotate(45deg); }
-.xMark::after  { transform: translate(-50%, -50%) rotate(-45deg); }
-
-.pProblem {
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--ink-dim);
-}
-
-/* ===== SOLVE CARD ===== */
-.solveCard {
-  background: var(--ink);
-  border-radius: 20px;
-  padding: 36px;
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 36px;
-  align-items: center;
-  position: relative;
-  opacity: 0; /* Framer Motion overrides this — prevents SSR flash */
-}
-
-.solutionRibbon {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  background: #1A9448;
-  color: #fff;
+.deviceLabel {
   font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 7px 18px;
-  border-radius: 20px;
-}
-
-.solvePhoto {
-  border-radius: 14px;
-  overflow: hidden;
-  background: rgba(243, 240, 231, 0.06);
-  aspect-ratio: 4 / 3;
-  position: relative;
-}
-
-.solvePhoto > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: rotate(-4deg) scale(1.12);
-}
-
-.solveLogoMark {
-  width: 70px;
-  height: 70px;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--cream);
-  border: 2px solid rgba(243, 240, 231, 0.15);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  margin-bottom: 18px;
-}
-
-.solveLogoMark img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.solveName {
-  font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--orange);
   letter-spacing: 0.05em;
-  margin-bottom: 14px;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.problemLine {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.problemLine strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ── SOLUTION ── */
+.solutionBlock {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  padding: 8vh 8vw;
 }
 
-.checkMark {
-  width: 20px;
-  height: 20px;
+.solutionInner {
+  text-align: center;
+  max-width: 760px;
+}
+
+.solutionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--olive);
+  color: var(--cream);
+  font-family: var(--font-jetbrains-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+
+.solutionTag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
   border-radius: 50%;
-  border: 1.3px solid var(--orange);
-  position: relative;
   flex-shrink: 0;
 }
 
-.checkMark::before {
-  content: '';
-  position: absolute;
-  top: 42%;
-  left: 50%;
-  width: 6px;
-  height: 10px;
-  border-right: 2px solid var(--orange);
-  border-bottom: 2px solid var(--orange);
-  transform: translate(-50%, -55%) rotate(45deg);
+.solutionText {
+  font-family: var(--font-plus-jakarta-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(24px, 3.4vw, 36px);
+  line-height: 1.45;
+  color: var(--ink);
 }
 
-.solveProblem {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: var(--cream);
-  max-width: 560px;
+.accent {
+  color: var(--orange);
+  font-weight: 800;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .problemGrid { grid-template-columns: 1fr; }
-  .pPhoto { height: 240px; }
-  .solveCard {
-    grid-template-columns: 120px 1fr;
-    padding: 26px;
-    gap: 22px;
-  }
-  .solveProblem { font-size: 16px; }
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .deviceRow { gap: 12px; }
+  .deviceCard { width: 96px; }
+  .deviceFrame { width: 96px; height: 96px; }
+  .deviceFrame svg { width: 36px; height: 36px; }
+  .hook { padding: 10vh 6vw; }
 }
 
-@media (max-width: 600px) {
-  .hook { padding: 90px 6vw 80px; }
-  .solveCard { grid-template-columns: 1fr; }
-  .solvePhoto { max-width: 160px; aspect-ratio: 1 / 1; }
+@media (prefers-reduced-motion: reduce) {
+  .blob1, .blob2, .blob3 { animation: none; }
+  .cursor { animation: none; }
 }
