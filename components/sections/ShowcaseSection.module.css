@@ -48,6 +48,27 @@
   transform: scale(1.06);
 }
 
+.muteBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(243, 240, 231, 0.15);
+  border: 1px solid rgba(243, 240, 231, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.muteBtn:hover {
+  background: rgba(243, 240, 231, 0.28);
+}
+
 @media (max-width: 640px) {
   .playBtn { width: 60px; height: 60px; }
 }
